@@ -229,9 +229,9 @@ dfEvtype$EVTYPE[grep(&quot;VOLCANIC&quot;, dfEvtype$EVTYPE)] &lt;- &quot;Volcani
 dfEvtype$EVTYPE[grep(&quot;MARINE HAIL&quot;, dfEvtype$EVTYPE)] &lt;- &quot;Marine Hail&quot;
 dfEvtype$EVTYPE[grep(&quot;HAIL&quot;, dfEvtype$EVTYPE)] &lt;- &quot;Hail&quot;
 dfEvtype$EVTYPE[grep(&quot;AGRICULTURAL FREEZE|^FROST|^FREEZ|HARD FREEZE|^DAMAGING FREEZ|FR&quot;, dfEvtype$EVTYPE)] &lt;- &quot;Frost/Freeze&quot;
-dfEvtype$EVTYPE[grep(&quot;SNOW|GLAZE|ICE|WINTER WEATHER|WINTRY|ICY ROAD&quot;, dfEvtype$EVTYPE)] &lt;- &quot;Winter Weather&quot;
 dfEvtype$EVTYPE[grep(&quot;MARINE TSTM&quot;, dfEvtype$EVTYPE)] &lt;- &quot;Marine Thunderstorm Wind&quot;
 dfEvtype$EVTYPE[grep(&quot;WINTER STORM&quot;, dfEvtype$EVTYPE)] &lt;- &quot;Winter Storm&quot;
+dfEvtype$EVTYPE[grep(&quot;SNOW|GLAZE|ICE|WINTER WEATHER|WINTRY|ICY ROAD|WINTER&quot;, dfEvtype$EVTYPE)] &lt;- &quot;Winter Weather&quot;
 dfEvtype$EVTYPE[grep(&quot;LANDSLIDE|LANDSLUMP|MUD|ROCK&quot;, dfEvtype$EVTYPE)] &lt;- &quot;Landslide&quot;
 
 dfEvtype$EVTYPE &lt;- as.factor(toupper(dfEvtype$EVTYPE))</code></pre>

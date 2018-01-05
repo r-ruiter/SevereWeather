@@ -124,9 +124,9 @@ dfEvtype$EVTYPE[grep("VOLCANIC", dfEvtype$EVTYPE)] <- "Volcanic Ash"
 dfEvtype$EVTYPE[grep("MARINE HAIL", dfEvtype$EVTYPE)] <- "Marine Hail"
 dfEvtype$EVTYPE[grep("HAIL", dfEvtype$EVTYPE)] <- "Hail"
 dfEvtype$EVTYPE[grep("AGRICULTURAL FREEZE|^FROST|^FREEZ|HARD FREEZE|^DAMAGING FREEZ|FR", dfEvtype$EVTYPE)] <- "Frost/Freeze"
-dfEvtype$EVTYPE[grep("SNOW|GLAZE|ICE|WINTER WEATHER|WINTRY|ICY ROAD", dfEvtype$EVTYPE)] <- "Winter Weather"
 dfEvtype$EVTYPE[grep("MARINE TSTM", dfEvtype$EVTYPE)] <- "Marine Thunderstorm Wind"
 dfEvtype$EVTYPE[grep("WINTER STORM", dfEvtype$EVTYPE)] <- "Winter Storm"
+dfEvtype$EVTYPE[grep("SNOW|GLAZE|ICE|WINTER WEATHER|WINTRY|ICY ROAD|WINTER", dfEvtype$EVTYPE)] <- "Winter Weather"
 dfEvtype$EVTYPE[grep("LANDSLIDE|LANDSLUMP|MUD|ROCK", dfEvtype$EVTYPE)] <- "Landslide"
 
 dfEvtype$EVTYPE <- as.factor(toupper(dfEvtype$EVTYPE))
