@@ -35,14 +35,14 @@ fname <- "data/StormData.csv.bz2"
 if(!file.exists(fname))
     download.file(url, fname, mode = "wb")
 
-dfStorm <- read.csv(fname)
+dfStorm <- read.csv(fname) %>% tbl_df()
 ```
 
 We don't need all variables, so select only those relevant for the analysis:
 
 
 ```r
-dfEvtype <- select(dfStorm, one_of(c("EVTYPE", "FATALITIES", "INJURIES", "PROPDMG", "PROPDMGEXP", "CROPDMG", "CROPDMGEXP"))) %>% tbl_df()
+dfEvtype <- select(dfStorm, one_of(c("EVTYPE", "FATALITIES", "INJURIES", "PROPDMG", "PROPDMGEXP", "CROPDMG", "CROPDMGEXP")))
 ```
 
 The National Weather Service provides the types of events in the dataset: [Table of Events by NWSI](https://www.ncdc.noaa.gov/stormevents/pd01016005curr.pdf)
@@ -140,12 +140,13 @@ dfEvtype$EVTYPE <- as.factor(toupper(dfEvtype$EVTYPE))
 The following table give the newly assigned events and the original event types:
 
 ```r
-y <- select(dfEvtype, one_of(c("EVTYPE", "EVTYPEO", "CROPF"))) %>% count(EVTYPE, EVTYPEO)
-write.csv(y, file = "data/EventTypes.csv", sep = ";", row.names = FALSE)
-# knitr::kable(y)
+evTypes <- select(dfEvtype, one_of(c("EVTYPE", "EVTYPEO", "CROPF"))) %>% count(EVTYPE, EVTYPEO)
+write.csv(evTypes, file = "data/EventTypes.csv", sep = ";", row.names = FALSE)
+# knitr::kable(evTypes)
+rm(evTypes)
 ```
 
-The resulting table contains now 111 event types, the ones that doesn't occur in the event type table from the NWS are not disturbing the results. There is no considerable damage or harm for those types.
+The resulting table contains now 109 event types, the ones that doesn't occur in the event type table from the NWS are not disturbing the results. There is no considerable damage or harm for those types.
 
 ### Damage
 
@@ -205,36 +206,6 @@ dfDMG <- arrange(dfEvtype, TOTDMG) %>% top_n(10, TOTDMG)
 
 The figure below gives the impact of damage by event type.
 
-
-```r
-par(mar = c(4, 9, 0, 1), oma = c(0, 0, 2, 0), mfcol = c(1, 3))
-barplot(height = dfDMG$TOTDMG, 
-        names.arg = dfDMG$EVTYPE, 
-        horiz = TRUE, 
-        ylab = "", 
-        xlab = "Total Damage", 
-        las = 1, 
-        cex.names = 0.8, 
-        cex.axis = 0.8)
-barplot(height = dfPROP$PROPDMG, 
-        names.arg = dfPROP$EVTYPE, 
-        horiz = TRUE, 
-        ylab = "", 
-        xlab = "Property Damage", 
-        las = 1, 
-        cex.names = 0.8, 
-        cex.axis = 0.8)
-barplot(height = dfCROP$CROPDMG, 
-        names.arg = dfCROP$EVTYPE, 
-        horiz = TRUE, 
-        ylab = "", 
-        xlab = "Crop Damage", 
-        las = 1, 
-        cex.names = 0.8, 
-        cex.axis = 0.8)
-mtext("Top 10 Damage (x B$) per Event Type", side = 3, outer = TRUE)
-```
-
 ![*Fig 1. Damage per Event Type*](fig/plot1-1.png)
 
 ## Impact on harm
@@ -249,27 +220,5 @@ dfINJURY <- arrange(dfEvtype, INJURIES) %>% top_n(10, INJURIES)
 
 The figure below give the impact of harm by event type.
 
-
-```r
-par(mar = c(4, 9, 0, 1), oma = c(0, 0, 1, 0), mfcol = c(1, 2))
-barplot(height = dfFATAL$FATALITIES, 
-        names.arg = dfFATAL$EVTYPE, 
-        horiz = TRUE, 
-        ylab = "", 
-        xlab = "Fatalities", 
-        las = 1, 
-        cex.names = 0.7, 
-        cex.axis = 0.7)
-barplot(height = dfINJURY$INJURIES, 
-        names.arg = dfINJURY$EVTYPE, 
-        horiz = TRUE, 
-        ylab = "", 
-        xlab = "Injuries", 
-        las = 1, 
-        cex.names = 0.7, 
-        cex.axis = 0.7)
-mtext("Top 10 Harm per Event Type", side = 3, outer = TRUE)
-```
-
 ![*Fig 2. Fatalities and Injuries per Event Type*](fig/plot2-1.png)
-
+  
