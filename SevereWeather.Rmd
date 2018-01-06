@@ -140,7 +140,7 @@ write.csv(evTypes, file = "data/EventTypes.csv", sep = ";", row.names = FALSE)
 rm(evTypes)
 ```
 
-The resulting table contains now `r length(unique(dfEvtype$EVTYPE))` event types, the ones that doesn't occur in the event type table from the NWS are not disturbing the results. There is no considerable damage or harm for those types.
+The resulting table contains now `r nlevels(dfEvtype$EVTYPE)` event types, the ones that doesn't occur in the event type table from the NWS are not disturbing the results. There is no considerable damage or harm for those types.
 
 ### Damage
 
@@ -197,7 +197,7 @@ dfDMG <- arrange(dfEvtype, TOTDMG) %>% top_n(10, TOTDMG)
 
 The figure below gives the impact of damage by event type.
 
-```{r plot1, fig.cap="*Fig 1. Damage per Event Type*", fig.height=5, fig.width=8, echo=FALSE}
+```{r plot1, fig.cap="*Fig 1. Damage per Event Type*", fig.height=5, fig.width=8, echo=FALSE, fig.show='asis', fig.align='center'}
 par(mar = c(4, 9, 0, 1), oma = c(0, 0, 2, 0), mfcol = c(1, 3))
 barplot(height = dfDMG$TOTDMG, 
         names.arg = dfDMG$EVTYPE, 
@@ -237,7 +237,7 @@ dfINJURY <- arrange(dfEvtype, INJURIES) %>% top_n(10, INJURIES)
 
 The figure below give the impact of harm by event type.
 
-```{r plot2, fig.cap="*Fig 2. Fatalities and Injuries per Event Type*", fig.height=5, fig.width=8, echo=FALSE}
+```{r plot2, fig.cap="*Fig 2. Fatalities and Injuries per Event Type*", fig.height=5, fig.width=8, echo=FALSE, fig.show='asis', fig.align='center'}
 par(mar = c(4, 9, 0, 1), oma = c(0, 0, 1, 0), mfcol = c(1, 2))
 barplot(height = dfFATAL$FATALITIES, 
         names.arg = dfFATAL$EVTYPE, 

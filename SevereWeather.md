@@ -206,7 +206,10 @@ dfDMG <- arrange(dfEvtype, TOTDMG) %>% top_n(10, TOTDMG)
 
 The figure below gives the impact of damage by event type.
 
-![*Fig 1. Damage per Event Type*](fig/plot1-1.png)
+<div class="figure" style="text-align: center">
+<img src="fig/plot1-1.png" alt="*Fig 1. Damage per Event Type*"  />
+<p class="caption">*Fig 1. Damage per Event Type*</p>
+</div>
 
 ## Impact on harm
 
@@ -220,5 +223,8 @@ dfINJURY <- arrange(dfEvtype, INJURIES) %>% top_n(10, INJURIES)
 
 The figure below give the impact of harm by event type.
 
-![*Fig 2. Fatalities and Injuries per Event Type*](fig/plot2-1.png)
+<div class="figure" style="text-align: center">
+<img src="fig/plot2-1.png" alt="*Fig 2. Fatalities and Injuries per Event Type*"  />
+<p class="caption">*Fig 2. Fatalities and Injuries per Event Type*</p>
+</div>
   
